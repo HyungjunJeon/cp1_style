@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% block content %}
+
+<form action="/cody/result" method="post">
+  {% csrf_token %}
+  <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm-1 pt-0">나이</legend>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="age" id="age1" value="10대" checked />
+          <label class="form-check-label" for="age1"> 10대 </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="age" id="age2" value="20대" />
+          <label class="form-check-label" for="age2"> 20대 </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="age" id="age3" value="30대" />
+          <label class="form-check-label" for="age3"> 30대 </label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm-1 pt-0">성별</legend>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gender"
+            id="gender1"
+            value="남자"
+            checked
+          />
+          <label class="form-check-label" for="gender1"> 남자 </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="gender2" value="여자" />
+          <label class="form-check-label" for="gender2"> 여자 </label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="height">신장</label>
+      <input type="text" class="form-control" name="height" id="height" placeholder="신장" />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="weight">체중</label>
+      <input type="text" class="form-control" name="weight" id="weight" placeholder="체중" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary">Post</button>
+    </div>
+  </div>
+</form>
+
+{% endblock %}

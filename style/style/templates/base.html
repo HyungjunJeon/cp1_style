@@ -1,177 +1,161 @@
 <!DOCTYPE html>
 <html lang="ko">
+  {% include 'head.html' %}
 
-{% include 'head.html' %}
-
-<body>
-<style>
-    body{
+  <body>
+    <style>
+      body {
         background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbJToI9%2FbtrLgrlVd5P%2FlaToWyb3ywYTVMt87LJYak%2Fimg.png");
-    }
-   
-*{
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-}
-.sidebar{
-  position: fixed;
-  width: 240px;
-  left: -240px;
-  height: 100%;
-  background: rgba(255,255,255,0.65);
-  transition: all .5s ease;
-}
-.sidebar header{
-  font-size: 28px;
-  color: white;
-  line-height: 70px;
-  text-align: center;
-  background: rgba(0,0,0,0.8);
-  border-bottom: 2px solid white;
-  user-select: none;
-  font-family: 'Kaushan Script', cursive;
-}
-.sidebar a{
-  display: block;
-  height: 65px;
-  width: 100%;
-  color: black;
-  line-height: 65px;
-  padding-left: 30px;
-  box-sizing: border-box;
-  border-bottom: 1px solid black;
-  border-left: 5px solid transparent;
-  font-family: 'Kaushan Script', cursive;
-  transition: all .5s ease;
-  text-decoration: none;
-}
-a.active,a:hover{
-  border-left: 5px solid #b93632;
-  color: #b93632;
-}
-.sidebar a i{
-  font-size: 23px;
-  margin-right: 16px;
-}
-.sidebar a span{
-  letter-spacing: 1px;
-  
-}
-#check{
-  display: none;
-}
-label #btn,label #cancel{
-  position: fixed;
-  cursor: pointer;
-  color: white;
-  border-radius: 5px;
-  border: 1px solid #262626;
-  margin: 15px 30px;
-  font-size: 29px;
-  background: #262626;
-  height: 45px;
-  width: 45px;
-  text-align: center;
-  line-height: 45px;
-  transition: all .5s ease;
-}
-label #cancel{
-  opacity: 0;
-  visibility: hidden;
-}
-#check:checked ~ .sidebar{
-  left: 0;
-  
-}
-#check:checked ~ label #btn{
-  margin-left: 245px;
-  opacity: 0;
-  visibility: hidden;
-}
-#check:checked ~ label #cancel{
-  margin-left: 245px;
-  opacity: 2;
-  visibility: visible;
-}
-@media(max-width : 860px){
-  .sidebar{
-    height: 100px;
-    width: 70px;
-    left: 0;
-    top: 0;
-    margin: 100px 0;
-  }
-  header,#btn,#cancel{
-    display: none;
-    
-  }
-  span{
-    position: absolute;
-    margin-left: 23px;
-    opacity: 0;
-    visibility: hidden;
-  }
-  .sidebar a{
-    height: 60px;
-  }
-  .sidebar a i{
-    margin-left: -10px;
-  }
-  a:hover {
-    width: 200px;
-    background: inherit;
-  }
-  .sidebar a:hover span{
-    opacity: 1;
-    visibility: visible;
-  }
-}
-</style>
-<input type="checkbox" id="check">
-<label for="check">
-    <i class="fas fa-bars" id="btn"></i>
-    <i class="fas fa-times" id="cancel"></i>
-</label>
-<div class="sidebar">
-    <header>My Menu</header>
-    <a href="#" class="fas fa-stream">
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+      }
+      .sidebar {
+        position: fixed;
+        width: 240px;
+        left: -240px;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.65);
+        transition: all 0.5s ease;
+      }
+      .sidebar header {
+        font-size: 28px;
+        color: white;
+        line-height: 70px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.8);
+        border-bottom: 2px solid white;
+        user-select: none;
+        font-family: "Kaushan Script", cursive;
+      }
+      .sidebar a {
+        display: block;
+        height: 65px;
+        width: 100%;
+        color: black;
+        line-height: 65px;
+        padding-left: 30px;
+        box-sizing: border-box;
+        border-bottom: 1px solid black;
+        border-left: 5px solid transparent;
+        font-family: "Kaushan Script", cursive;
+        transition: all 0.5s ease;
+        text-decoration: none;
+      }
+      a.active,
+      a:hover {
+        border-left: 5px solid #b93632;
+        color: #b93632;
+      }
+      .sidebar a i {
+        font-size: 23px;
+        margin-right: 16px;
+      }
+      .sidebar a span {
+        letter-spacing: 1px;
+      }
+      #check {
+        display: none;
+      }
+      label #btn,
+      label #cancel {
+        position: fixed;
+        cursor: pointer;
+        color: white;
+        border-radius: 5px;
+        border: 1px solid #262626;
+        margin: 15px 30px;
+        font-size: 29px;
+        background: #262626;
+        height: 45px;
+        width: 45px;
+        text-align: center;
+        line-height: 45px;
+        transition: all 0.5s ease;
+      }
+      label #cancel {
+        opacity: 0;
+        visibility: hidden;
+      }
+      #check:checked ~ .sidebar {
+        left: 0;
+      }
+      #check:checked ~ label #btn {
+        margin-left: 245px;
+        opacity: 0;
+        visibility: hidden;
+      }
+      #check:checked ~ label #cancel {
+        margin-left: 245px;
+        opacity: 2;
+        visibility: visible;
+      }
+      @media (max-width: 860px) {
+        .sidebar {
+          height: 100px;
+          width: 70px;
+          left: 0;
+          top: 0;
+          margin: 100px 0;
+        }
+        header,
+        #btn,
+        #cancel {
+          display: none;
+        }
+        span {
+          position: absolute;
+          margin-left: 23px;
+          opacity: 0;
+          visibility: hidden;
+        }
+        .sidebar a {
+          height: 60px;
+        }
+        .sidebar a i {
+          margin-left: -10px;
+        }
+        a:hover {
+          width: 200px;
+          background: inherit;
+        }
+        .sidebar a:hover span {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    </style>
+    <input type="checkbox" id="check" />
+    <label for="check">
+      <i class="fas fa-bars" id="btn"></i>
+      <i class="fas fa-times" id="cancel"></i>
+    </label>
+    <div class="sidebar">
+      <header>My Menu</header>
+      <a href="#" class="fas fa-stream">
         <i class="fas fa-qrcode"></i>
         <span>Dashboard</span>
-    </a>
-    <a href="#">
+      </a>
+      <a href="#">
         <i class="fas fa-eye"></i>
         <span>Trend</span>
-    </a>
-    <a href="#">
+      </a>
+      <a href="/cody">
         <i class="fas fa-tshirt"></i>
         <span>Cody</span>
-    </a>
-    <a href="#">
+      </a>
+      <a href="#">
         <i class="fas fa-thumbs-up"></i>
         <span>Recommend</span>
-    </a>
-    <a href="#">
+      </a>
+      <a href="#">
         <i class="fas fa-info"></i>
         <span>Information</span>
-    </a>
-
-</div>
-
-    {% include 'header.html' %}
-
-    <div style="margin-bottom:3rem; height: 15rem; width: 400px; left:70%">
-        <div style="position:relative; top:0; left:110%; margin:2rem;">
-            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FsgzlP%2FbtrLhgjt8Mj%2FkJ1Exdcdzn18EjHYu6kv21%2Fimg.png" width = "400",height="300">
-
-        </div>
+      </a>
     </div>
-
-
-
-    
-    {% include 'footer.html' %}
-
-
-</body>
+    {% include 'header.html' %} {% block content %} {% endblock %} {% include 'footer.html' %}
+  </body>
 </html>
