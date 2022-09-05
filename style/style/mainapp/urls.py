@@ -22,6 +22,6 @@ app_name = "mainapp"
 
 urlpatterns = [
     path('',door_page, name='door_page'),
-    path('cody',cody_page, name='cody_page'),
+    path('cody/',cody_page, name='cody_page'),
     path('cody/result',cody_result, name='cody_result')
 ]

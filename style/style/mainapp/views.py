@@ -9,8 +9,8 @@ def cody_page(request):
     return render(request, 'mainapp/cody.html')
 
 def cody_result(request):
-    if request.method == 'post':
-        print(request.POST.get())
+    if request.method == 'POST':
+        print(request.POST)
         age = request.POST.get('age')
         gender = request.POST.get('gender')
         height = float(request.POST.get('height'))

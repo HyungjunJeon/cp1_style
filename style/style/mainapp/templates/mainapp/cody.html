@@ -1,26 +1,33 @@
 {% extends 'base.html' %} {% block content %}
 
-<form action="/cody/result" method="post">
+<script>
+  $(document).ready(function() {
+    $('#majorcategories').on('change', function() {
+      $('#subcategories').prop('disabled', false)
+      $('#subcategories').children().remove()
+      $('#subcategories').append($("<option class='default' hidden>중분류</option>"))
+      
+      if($(this).val() == "상의") {
+          $('#subcategories').append($("<option value='1'>One</option>"))
+          $('#subcategories').append($("<option value='2'>Two</option>"))
+          $('#subcategories').append($("<option value='3'>Three</option>"))
+      } else {
+          $('#subcategories').append($("<option value='4'>Four</option>"))
+          $('#subcategories').append($("<option value='5'>Five</option>"))
+          $('#subcategories').append($("<option value='6'>Six</option>"))
+      }     
+  })
+  })
+</script>
+
+<form id ="cody_form" method="post" action="/cody/result">
   {% csrf_token %}
-  <fieldset class="form-group">
-    <div class="row">
-      <legend class="col-form-label col-sm-1 pt-0">나이</legend>
-      <div class="col-sm-10">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="age" id="age1" value="10대" checked />
-          <label class="form-check-label" for="age1"> 10대 </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="age" id="age2" value="20대" />
-          <label class="form-check-label" for="age2"> 20대 </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="age" id="age3" value="30대" />
-          <label class="form-check-label" for="age3"> 30대 </label>
-        </div>
-      </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="height">나이</label>
+      <input type="text" class="form-control" name="age" id="age" placeholder="나이" />
     </div>
-  </fieldset>
+  </div>
   <fieldset class="form-group">
     <div class="row">
       <legend class="col-form-label col-sm-1 pt-0">성별</legend>
@@ -54,31 +61,19 @@
     </div>
   </div>
   <div class="form-group-row">
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="majorcategories" name="majorcategories" data-bs-toggle="dropdown" aria-expanded="false">
-          대분류
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="majorcategories">
-          <li><a class="dropdown-item" href="#" value="bot">bot</a></li>
-          <li><a class="dropdown-item" href="#" value="outer">outer</a></li>
-          <li><a class="dropdown-item" href="#" value="top">top</a></li>
-        </ul>
-      </div>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="subcategories" name="subcategories" data-bs-toggle="dropdown" aria-expanded="false">
-          중분류
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="subcategories">
-          <li><a class="dropdown-item" href="#" value="cot">cot</a></li>
-          <li><a class="dropdown-item" href="#" value="slax">slax</a></li>
-          <li><a class="dropdown-item" href="#" value="fleece">fleece</a></li>
-        </ul>
-      </div>
+    <select id="majorcategories" name="majorcategories" class="form-select" aria-label="Default select example">
+      <option hidden>대분류</option>
+      <option value="상의">상의</option>
+      <option value="하의">하의</option>
+    </select>
+    <select id="subcategories" name="subcategories" class="form-select" aria-label="Default select example" disabled>
+      <option hidden>중분류</option>
+    </select>
     </div>
   </div>
   <div class="form-group row">
     <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary">Post</button>
+      <button type="submit" id="submit" class="btn btn-primary">Post</button>
     </div>
   </div>
 </form>
