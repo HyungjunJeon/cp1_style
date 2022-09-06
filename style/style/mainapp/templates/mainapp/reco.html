@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block content %}
+
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
+  type="text/css"
+/>
+
+<form
+  id="myAwesomeDropzone"
+  action="/reco/result"
+  class="dropzone"
+  method="POST"
+  enctype="multipart/form-data"
+>
+  {% csrf_token %}
+  <button type="submit">전송</button>
+</form>
+<script type="text/javascript">
+  Dropzone.autoDiscover = false
+  $("#myAwesomeDropzone").dropzone({
+    url: "/reco/result",
+    addRemoveLinks: true,
+    method: "post",
+    filesizeBase: 1024,
+  })
+</script>
+
+{% endblock %}
