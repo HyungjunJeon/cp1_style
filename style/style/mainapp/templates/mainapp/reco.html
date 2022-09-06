@@ -6,10 +6,9 @@
   href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
   type="text/css"
 />
-
 <form
   id="myAwesomeDropzone"
-  action="/reco/result"
+  action="/reco/"
   class="dropzone"
   method="POST"
   enctype="multipart/form-data"
@@ -20,7 +19,7 @@
 <script type="text/javascript">
   Dropzone.autoDiscover = false
   $("#myAwesomeDropzone").dropzone({
-    url: "/reco/result",
+    url: "/reco/",
     addRemoveLinks: true,
     method: "post",
     filesizeBase: 1024,

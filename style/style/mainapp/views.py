@@ -12,8 +12,8 @@ def cody_page(request):
 
 def cody_result(request):
     if request.method == 'POST':
-        print(request.POST)
-        age = request.POST.get('age')
+        age = int(request.POST.get('age'))
+        print(type(age))
         gender = request.POST.get('gender')
         height = float(request.POST.get('height'))
         weight = float(request.POST.get('weight'))
@@ -25,11 +25,6 @@ def cody_result(request):
 
 def reco_page(request):
     if request.method == "POST":
-        print(request.POST)
-    return render(request, 'mainapp/reco.html')
-
-def reco_result(request):
-    if request.method =='POST': #post  
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' :  #   ajax  
             if not os.path.exists(ENROLLED_DATA): #  settings            
                 os.makedirs(ENROLLED_DATA,exist_ok=True) #     
@@ -37,4 +32,4 @@ def reco_result(request):
                 with open('%s/%s'%(ENROLLED_DATA,file_obj.name),"wb") as f: #    
                     for chunk in file_obj.chunks():   
                         f.write(chunk)  #chunk      
-    return render(request, 'mainapp/reco/result.html')
+    return render(request, 'mainapp/reco.html')

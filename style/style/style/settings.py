@@ -99,8 +99,12 @@ WSGI_APPLICATION = 'style.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'fuusaujh',
+        'USER': 'fuusaujh',
+        'PASSWORD' : 'KPbDgG1NtOXKVcU_rstsh0xMTFDChg0J',
+        'HOST' : 'jelani.db.elephantsql.com',
+        'PORT' :'5432',
     }
 }
 
