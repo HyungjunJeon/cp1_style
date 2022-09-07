@@ -1,5 +1,26 @@
 from django.shortcuts import render
 import os
+import psycopg2
+
+#아래 정보를 입력
+user = 'fuusaujh'
+password = 'KPbDgG1NtOXKVcU_rstsh0xMTFDChg0J'
+host_product = 'jelani.db.elephantsql.com'
+dbname = '	fuusaujh'
+port='5432'
+
+product_connection_string = "dbname={dbname} user={user} host={host} password={password} port={port}"\
+                            .format(dbname=dbname,
+                                    user=user,
+                                    host=host_product,
+                                    password=password,
+                                    port=port)    
+try:
+    conn = psycopg2.connect(product_connection_string)
+except:
+    print("I am unable to connect to the database")
+
+cur = conn.cursor()
 
 # Create your views here.
 ENROLLED_DATA = 'static/enrolled_data'
@@ -8,20 +29,21 @@ def door_page(request):
     return render(request, 'mainapp/home.html')
 
 def cody_page(request):
-    return render(request, 'mainapp/cody.html')
-
-def cody_result(request):
     if request.method == 'POST':
         age = int(request.POST.get('age'))
-        print(type(age))
         gender = request.POST.get('gender')
         height = float(request.POST.get('height'))
         weight = float(request.POST.get('weight'))
         majorcategories = request.POST.get('majorcategories')
         subcategories = request.POST.get('subcategories')
-        return render(request, 'mainapp/cody/result.html', context={'age': age, 'gender': gender, 'height': height, 'weight': weight, 'majorcategories': majorcategories, 'subcategories': subcategories})
+        cur.execute("""
+            INSERT INTO mainapp_information_user VALUES(%s, %s, %s, %s, %s, %s)
+        """,(age, gender, height, weight, majorcategories, subcategories))
+        conn.commit()
+        conn.close()
+        return render(request, 'mainapp/cody.html', context={'age': age, 'gender': gender, 'height': height, 'weight': weight, 'majorcategories': majorcategories, 'subcategories': subcategories})
     else:
-        return render(request, 'mainapp/cody/result.html', context={'age': 'age'})
+        return render(request, 'mainapp/cody.html', context={'age': 'age'})
 
 def reco_page(request):
     if request.method == "POST":
