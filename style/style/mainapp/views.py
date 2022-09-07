@@ -38,9 +38,9 @@ def cody_page(request):
         subcategories = request.POST.get('subcategories')
         cur.execute("""
             INSERT INTO mainapp_information_user VALUES(%s, %s, %s, %s, %s, %s)
-        """,(age, gender, height, weight, majorcategories, subcategories))
+        """,(gender, age, height, weight, majorcategories, subcategories))
         conn.commit()
-        conn.close()
+        cur.close()
         return render(request, 'mainapp/cody.html', context={'age': age, 'gender': gender, 'height': height, 'weight': weight, 'majorcategories': majorcategories, 'subcategories': subcategories})
     else:
         return render(request, 'mainapp/cody.html', context={'age': 'age'})
@@ -55,3 +55,14 @@ def reco_page(request):
                     for chunk in file_obj.chunks():   
                         f.write(chunk)  #chunk      
     return render(request, 'mainapp/reco.html')
+
+def review_page(request):
+    gender = request.POST.get('gender')
+    recommend = request.POST.get('exampleRadios')
+    what = request.POST.get('exampleRadios1')
+    cur.execute("""
+        INSERT INTO mainapp_review_user VALUES( %s, %s, %s)
+    """, (gender, recommend, what))
+    conn.commit()
+    cur.close()
+    return render(request, 'mainapp/review.html')
