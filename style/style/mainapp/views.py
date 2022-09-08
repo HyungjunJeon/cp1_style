@@ -30,24 +30,18 @@ def door_page(request):
 
 def cody_page(request):
     if request.method == 'POST':
+        cur = conn.cursor()
         age = int(request.POST.get('age'))
         gender = request.POST.get('gender')
         height = float(request.POST.get('height'))
         weight = float(request.POST.get('weight'))
         majorcategories = request.POST.get('majorcategories')
         subcategories = request.POST.get('subcategories')
-        try:
-            cur.execute("""
-                INSERT INTO mainapp_information_user VALUES(%s, %s, %s, %s, %s, %s)
-            """,(gender, age, height, weight, majorcategories, subcategories))
-        except:
-            try:
-                cur.close()
-                cur = conn.cursor()
-            except:
-                conn.close()
-                conn = psycopg2.connect(product_connection_string)
-            cur = conn.cursor()
+        cur.execute("""
+            INSERT INTO mainapp_information_user VALUES(%s, %s, %s, %s, %s, %s)
+        """,(gender, age, height, weight, majorcategories, subcategories))
+        conn.commit()
+        cur.close()
         return render(request, 'mainapp/cody.html', context={'age': age, 'gender': gender, 'height': height, 'weight': weight, 'majorcategories': majorcategories, 'subcategories': subcategories})
     else:
         return render(request, 'mainapp/cody.html', context={'age': 'age'})
@@ -65,21 +59,15 @@ def reco_page(request):
 
 def review_page(request):
     if request.method == 'POST':
+        cur = conn.cursor()
         gender = request.POST.get('gender')
         recommend = request.POST.get('exampleRadios')
         what = request.POST.get('exampleRadios1')
-        try:
-            cur.execute("""
+        cur.execute("""
             INSERT INTO mainapp_review_user (gender, recommend, what) VALUES( %s, %s, %s)
         """, (gender, recommend, what))
-        except:
-            try:
-                cur.close()
-                cur = conn.cursor()
-            except:
-                conn.close()
-                conn = psycopg2.connect(product_connection_string)
-            cur = conn.cursor()
+        conn.commit()
+        cur.close()
         return render(request, 'mainapp/review.html')
     else:
         return render(request, 'mainapp/review.html')
