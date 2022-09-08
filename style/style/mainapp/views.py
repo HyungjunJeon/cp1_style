@@ -59,7 +59,6 @@ def reco_page(request):
 
 def review_page(request):
     if request.method == 'POST':
-        print('docker 변경사항 적용 test')
         cur = conn.cursor()
         gender = request.POST.get('gender')
         recommend = request.POST.get('exampleRadios')
