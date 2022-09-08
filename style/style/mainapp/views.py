@@ -57,12 +57,15 @@ def reco_page(request):
     return render(request, 'mainapp/reco.html')
 
 def review_page(request):
-    gender = request.POST.get('gender')
-    recommend = request.POST.get('exampleRadios')
-    what = request.POST.get('exampleRadios1')
-    cur.execute("""
-        INSERT INTO mainapp_review_user VALUES( %s, %s, %s)
-    """, (gender, recommend, what))
-    conn.commit()
-    cur.close()
-    return render(request, 'mainapp/review.html')
+    if request.method == 'POST':
+        gender = request.POST.get('gender')
+        recommend = request.POST.get('exampleRadios')
+        what = request.POST.get('exampleRadios1')
+        cur.execute("""
+            INSERT INTO mainapp_review_user (gender, recommend, what) VALUES( %s, %s, %s)
+        """, (gender, recommend, what))
+        conn.commit()
+        cur.close()
+        return render(request, 'mainapp/review.html')
+    else:
+        return render(request, 'mainapp/review.html')
