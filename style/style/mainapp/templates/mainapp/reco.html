@@ -8,10 +8,11 @@
 />
 <form
   id="myAwesomeDropzone"
-  action="/reco/"
+  action="/reco/result"
   class="dropzone"
   method="POST"
   enctype="multipart/form-data"
+  name="dropzone"
 >
   {% csrf_token %}
   <button type="submit">전송</button>
@@ -23,6 +24,12 @@
     addRemoveLinks: true,
     method: "post",
     filesizeBase: 1024,
+  })
+
+  $(document).ready(function () {
+    $("#myAwesomeDropzone").on("change", function () {
+      alert("changed")
+    })
   })
 </script>
 
