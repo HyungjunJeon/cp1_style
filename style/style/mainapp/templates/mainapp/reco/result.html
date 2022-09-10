@@ -215,6 +215,7 @@
           })
         })
       </script>
+      {% if results.length > 0 %}
       {% for result in results %}
       <form
         action="/review/"
@@ -246,6 +247,10 @@
         </div>
         </form>
         {% endfor %}
+    {% else %}
+    <p>추천된 결과가 없습니다</p>
+    {% endif %}
+      
         <div>
         <button type="button" class="btn btn-primary" 
         style="position:relative;

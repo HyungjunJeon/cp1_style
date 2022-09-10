@@ -114,8 +114,6 @@ def reco_result(request):
     if request.method == "POST":
         cur = conn.cursor()
         results = []
-        urls = []
-        img_names = []
         for (root, directories, files) in os.walk(ENROLLED_DATA):
             for file in files:
                 file_path = os.path.join(root, file)
@@ -129,8 +127,6 @@ def reco_result(request):
                 top_class = None
                 bot_class = None
                 result_class_list = []
-                # results.append(names)
-                # results.append(classes)
                 if len(top_list) > 0:
                     top = top_list[0]
                     top_index = names.index(top)
@@ -141,9 +137,7 @@ def reco_result(request):
                     bot_index = names.index(bot)
                     bot_class = classes[bot_index]
                     result_class_list.append(bot_class)
-                    # results.append(result_class_list)
                 major_sub = change(result_class_list)
-                # results.append(major_sub)
                 for item in major_sub:
                     cur.execute(f"""
                         SELECT link FROM clothing.{item[0]} where sub like '%{item[1]}%' order by product_sales desc limit 1
